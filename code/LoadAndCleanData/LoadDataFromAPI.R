@@ -58,6 +58,10 @@ ipps_data <- map2_dfr(urls, years, get_content)
 ### write the dataframe to the raw data file as a csv
 write_csv(ipps_data, file = "data/raw/ipps_data.csv")
 
+### Include a text file with the date current date to know when the data was last pulled from the API
+write_file(paste0("Data last pulled from API on ", Sys.Date()), 
+           file = paste0("data/raw/last_pull_data_", Sys.Date(), ".txt"))
+
 ### clear the workspace
 remove(ipps_data, urls, years, get_content)
 
