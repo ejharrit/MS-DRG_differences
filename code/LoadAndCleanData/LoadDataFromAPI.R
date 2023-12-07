@@ -35,7 +35,7 @@ years <- c("2019", "2018", "2017")
 
 ### Create a function that GETs the data from the url and parses it into a dataframe
 get_content <- function(url, year) {
-  request(urls[3]) %>%
+  request(url) %>%
     ### the requests seem to only pull 1000 records, this adds an iterative request to *repeatedly* pull
     ### 1000 records at a time
     req_perform_iterative(next_req = iterate_with_offset("offset", start = 1, offset = 1000)) %>%

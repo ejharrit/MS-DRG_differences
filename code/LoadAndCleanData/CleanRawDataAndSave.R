@@ -94,7 +94,7 @@ ipps_data <- ipps_data %>%
 #####
 
 ### write the dataframe to the clean data file as a csv
-write_csv(ipps_data, file = "data/clean/ipps_data.csv")
+write_csv(ipps_data, file = "data/cleaned/ipps_data.csv")
 
 ### clear the workspace
 remove(ipps_data, inland_empire)
