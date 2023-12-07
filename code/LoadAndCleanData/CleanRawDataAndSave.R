@@ -28,7 +28,7 @@ ipps_data <- read_csv("data/raw/ipps_data.csv")
 #####
 
 
-##### Check the general structure of the data to see if there are any structural issues, 
+##### Check the general structure of the data to see if there are any structural issues,
 ##### such as missing values or anything like that, that need to be fixed
 #####
 
@@ -37,7 +37,9 @@ skim(ipps_data)
 str(ipps_data)
 
 ### Data was meant to be pulled only for California. This checks that only California data was pulled
-nrow(ipps_data) == ipps_data %>% filter(rndrng_prvdr_state_abrvtn == "CA") %>% nrow()
+nrow(ipps_data) == ipps_data %>%
+  filter(rndrng_prvdr_state_abrvtn == "CA") %>%
+  nrow()
 
 ##### --
 #####
@@ -47,16 +49,18 @@ nrow(ipps_data) == ipps_data %>% filter(rndrng_prvdr_state_abrvtn == "CA") %>% n
 ##### as well as indicate whether there were complications
 #####
 
-### This uses a list of cities from the Municipal Management Association of Southern California to determine which cities 
+### This uses a list of cities from the Municipal Management Association of Southern California to determine which cities
 ### are part of the Inland Empire, this list can be accessed at https://mmasc.org/163/Inland-Empire-Region
-inland_empire <- c("Adelanto",      "Apple Valley",   "Banning",        "Barstow",          "Beaumont",         
-                   "Big Bear Lake", "Calimesa",       "Canyon Lake",    "Chino",            "Chino Hills",    
-                   "Colton",        "Corona",         "Eastvale",       "Fontana",          "Grand Terrace",  
-                   "Hemet",         "Hesperia",       "Highland",       "Jurupa Valley",    "Lake Elsinore",  
-                   "Loma Linda",    "Menifee",        "Montclair",      "Moreno Valley",    "Murrieta",      
-                   "Norco",         "Ontario",        "Perris",         "Rancho Cucamonga", "Redlands",
-                   "Rialto",        "Riverside",      "San Bernardino", "San Jacinto",      "Temecula",
-                   "Upland",        "Victorville",    "Wildomar",       "Yucaipa")
+inland_empire <- c(
+  "Adelanto",       "Apple Valley", "Banning",        "Barstow",          "Beaumont",
+  "Big Bear Lake",  "Calimesa",     "Canyon Lake",    "Chino",            "Chino Hills",
+  "Colton",         "Corona",       "Eastvale",       "Fontana",          "Grand Terrace",
+  "Hemet",          "Hesperia",     "Highland",       "Jurupa Valley",    "Lake Elsinore",
+  "Loma Linda",     "Menifee",      "Montclair",      "Moreno Valley",    "Murrieta",
+  "Norco",          "Ontario",      "Perris",         "Rancho Cucamonga", "Redlands",
+  "Rialto",         "Riverside",    "San Bernardino", "San Jacinto",      "Temecula",
+  "Upland",         "Victorville",  "Wildomar",       "Yucaipa"
+)
 
 ipps_data <- ipps_data %>%
   rename(
@@ -79,7 +83,7 @@ ipps_data <- ipps_data %>%
       TRUE                              ~ "none detected"
     )
   ) %>%
-  ### Reorder the columns so that year is first and the inland_empire column is near the other 
+  ### Reorder the columns so that year is first and the inland_empire column is near the other
   ### geography fields and the complication column is near the drg_desc column
   select(year, prvdr_cd:zip, inland_empire, drg_cd:drg_desc, complication, everything())
 
